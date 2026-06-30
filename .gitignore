@@ -1,0 +1,8 @@
+# Local build artifacts
+build/
+.dts
+*.bin
+*.hex
+*.uf2
+.DS_Store
+*.swp

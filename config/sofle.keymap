@@ -101,8 +101,16 @@
 &none             &rgb_ug RGB_BRD &rgb_ug RGB_BRI &none           &none           &none                                   &none &none &none &none &none &none
 &none             &none           &none           &none           &none           &none            &rgb_ug RGB_TOG &none  &none &none &none &none &none &none
                                   &none           &none           &none           &none            &none           &none  &none &none &none &none
-            >;
         };
 
     };
+};
+
+/*
+ * 覆盖底层的 kscan0 配置。
+ * 由于 PCB 的二极管方向物理设计（或者焊接方向）可能为 row2col（从行到列），
+ * 我们在这里将扫描方向覆盖为 "row2col"，以便通过软件修正使按键能够正常触发工作。
+ */
+&kscan0 {
+    diode-direction = "row2col";
 };

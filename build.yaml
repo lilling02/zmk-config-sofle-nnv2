@@ -17,3 +17,6 @@ include:
     shield: sofle_left
   - board: nice_nano//zmk
     shield: sofle_right
+  # 添加清除蓝牙缓存固件的编译目标，用于解决蓝牙连不上电脑的问题
+  - board: nice_nano//zmk
+    shield: settings_reset

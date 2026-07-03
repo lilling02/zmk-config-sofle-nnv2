@@ -106,3 +106,40 @@
 
     };
 };
+
+/*
+ * 软件修正矩阵引脚定义：
+ * 由于 nice!nano 主控物理焊接翻面（镜像反接），左右引脚发生物理对调。
+ * 我们在这里通过重写 kscan0 的 row-gpios 和 col-gpios 来实现软件层面的引脚重映射，
+ * 从而使按键能够正确按行、列逻辑触发，避免拆焊。
+ */
+&kscan0 {
+    row-gpios
+        = <&pro_micro 19 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // 物理行 0
+        , <&pro_micro 18 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // 物理行 1
+        , <&pro_micro 15 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // 物理行 2
+        , <&pro_micro 14 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // 物理行 3
+        , <&pro_micro 16 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // 物理行 4
+        ;
+    col-gpios
+        = <&pro_micro 3 GPIO_ACTIVE_HIGH> // 物理列 0
+        , <&pro_micro 4 GPIO_ACTIVE_HIGH> // 物理列 1
+        , <&pro_micro 6 GPIO_ACTIVE_HIGH> // 物理列 2
+        , <&pro_micro 7 GPIO_ACTIVE_HIGH> // 物理列 3
+        , <&pro_micro 8 GPIO_ACTIVE_HIGH> // 物理列 4
+        , <&pro_micro 9 GPIO_ACTIVE_HIGH> // 物理列 5
+        ;
+};
+
+/*
+ * 同样修正旋钮编码器的引脚重映射
+ */
+&left_encoder {
+    a-gpios = <&pro_micro 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+    b-gpios = <&pro_micro 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+};
+
+&right_encoder {
+    a-gpios = <&pro_micro 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+    b-gpios = <&pro_micro 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+};
